@@ -1,0 +1,6 @@
+
+# old: bart branch umg-devel commit v0.6.00-2282-g420ece3
+
+# new: bart branch nonlinear_phyics_cmdline commit v0.6.00-203-g660a00a
+
+simu_subspace_mgre.sh : based on the signal tool
