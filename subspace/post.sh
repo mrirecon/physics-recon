@@ -69,13 +69,12 @@ bart transpose 0 1 tmp_T1map2 tmp_T1map3
 bart flip $(bart bitmask 1) tmp_T1map3 $T1_map
 
 # join the cofficient maps together (Figure 7A)
-bart slice 6 0 tmp_reco_coeff_maps coeff1.coo
-bart slice 6 1 tmp_reco_coeff_maps coeff0.coo
-bart slice 6 2 tmp_reco_coeff_maps coeff2.coo
-bart slice 6 3 tmp_reco_coeff_maps coeff3.coo
+bart slice 6 0 tmp_reco_coeff_maps coeff1
+bart slice 6 1 tmp_reco_coeff_maps coeff0
+bart slice 6 2 tmp_reco_coeff_maps coeff2
+bart slice 6 3 tmp_reco_coeff_maps coeff3
 
-bart join 0 coeff*.coo $coeff_maps_masked
+bart join 0 coeff0 coeff1 coeff2 coeff3 $coeff_maps_masked
 
-rm coeff*.coo
 
 

@@ -84,3 +84,14 @@ bart join 1 subspace_T1maps subspace_T1maps_rela_diff Fig_6B
 rm tmp*.{cfl,hdr}
 
 
+# ------ moba vs subspace -------
+
+
+
+bart join 1 Fig_6A Fig_6B Fig_6C Fig_6
+
+cfl2png -z1 -CV -A -l0 -u2.0 Fig_6 Fig_6.png
+
+python3 ../utils/normalize_relative_error.py
+
+
