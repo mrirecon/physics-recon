@@ -16,6 +16,8 @@ T1_ref = np.squeeze(cfl.readcfl(str("./phan_ref_T1s")))
 T1_ref = abs(T1_ref)
 T1_ref[np.isnan(T1_ref)] = 0
 
+print('Subspace Recon: Error vs Subspace Size)');
+
 # errors for linear subspace (number of subspace coefficients)
 for k in range(4):
     k = k + 2
@@ -28,6 +30,8 @@ for k in range(4):
     error = LA.norm(rela_diff)/LA.norm(abs(T1_ref))
     print(error)
 
+print('Subspace Recon: Error vs Regularization');
+
 # errors for linear subspace (regularization parameters)
 for k in range(4):
     data = "./subspace_T1map_R" + str(k)
@@ -39,6 +43,8 @@ for k in range(4):
     error = LA.norm(rela_diff)/LA.norm(abs(T1_ref))
     print(error)
     
+print('Model-based Recon: Error vs Regularization');
+
 # errors for nonlinear moba (regularization parameters)
 for k in range(4):
     data = "./moba_T1_masked_" + str(k)
@@ -49,3 +55,5 @@ for k in range(4):
     rela_diff[np.isnan(rela_diff)] = 0
     error = LA.norm(rela_diff)/LA.norm(abs(T1_ref))
     print(error)
+
+

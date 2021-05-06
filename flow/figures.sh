@@ -21,3 +21,8 @@ fi
 # --- cfl2png ---
 python3 cfl2png_flow.py
 
+cp png_moba_flow/MAG_081.png Figure4_Top_Left.png
+cp png_moba_flow/VEL_081.png Figure4_Top_Right.png
+cp png_phasediff_flow/MAG_081.png Figure4_Bottom_Left.png
+cp png_phasediff_flow/VEL_081.png Figure4_Bottom_Right.png
+

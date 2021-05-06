@@ -92,7 +92,7 @@ def plot_signal(mag, phi, singular_value, singular_vec, TE):
     ax2.set_xlabel('Time / ms')
     ax2.set_ylabel('Phase')
 
-    plt.savefig('plot_mgre_signal.png')
+    plt.savefig('Figure5B_MGRE-Dictionary.eps')
 
 
     # singular value
@@ -107,7 +107,7 @@ def plot_signal(mag, phi, singular_value, singular_vec, TE):
     plt.ylabel('Cumulative Sum')
     plt.title('Accumulated PCA Coefficients')
     
-    plt.savefig('plot_mgre_S.png')
+    plt.savefig('Figure5B_MGRE-Coefficients.eps')
     
     
     # singular vector
@@ -140,7 +140,7 @@ def plot_signal(mag, phi, singular_value, singular_vec, TE):
     
     ax1.set_title('Temporal Subspace Curves')
     
-    plt.savefig('plot_mgre_U.png')
+    plt.savefig('Figure5B_MGRE-Subspace.eps')
     
 
 # %%

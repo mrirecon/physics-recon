@@ -24,3 +24,8 @@ fi
 
 python3 cfl2png_wf.py
 
+cp png_moba_wf/Fat_000.png Figure3_Fat.png
+cp png_moba_wf/fB0_000.png Figure3_B0.png
+cp png_moba_wf/R2S_000.png Figure3_R2star.png
+cp png_moba_wf/Water_000.png Figure3_Water.png
+

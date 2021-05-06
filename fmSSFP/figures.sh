@@ -15,11 +15,13 @@ if [ ! -e $TOOLBOX_PATH/bart ] ; then
     exit 1
 fi
 
+ORIENT="-x1 -y0 -FXY"
+
 # write out pngs
-cfl2png -z1 -CM reco_rss RSS_magn
-cfl2png -z1 -CM fmSSFP-reco reco_magn
-cfl2png -z1 -CP fmSSFP-reco reco_phas
-cfl2png -z1 -CM mask mask
+cfl2png $ORIENT -z1 -CM reco_rss Figure8_RSS
+cfl2png $ORIENT -z1 -CM fmSSFP-reco Figure8_magn
+cfl2png $ORIENT -z1 -CP fmSSFP-reco Figure8_phase
+cfl2png $ORIENT -z1 -CM mask Figure8_mask
 
 # taking preparation scans into account
 preps=1000
@@ -30,6 +32,6 @@ for (( phase=0; phase<360; phase+=90))
 do
     getphase=$(( (360 - $offset + $phase) % $phases ))
     bart extract 5 $getphase $(( $getphase + 1 )) bSSFPsyn bSSFPsyn-deg-$phase
-    cfl2png -z1 -l 0.0 -u 0.605 -CM bSSFPsyn-deg-$phase bSSFPsyn-deg-$phase
+    cfl2png $ORIENT -z1 -l 0.0 -u 0.605 -CM bSSFPsyn-deg-$phase Figure8_bSSFP-Synth-$phase
 done
 

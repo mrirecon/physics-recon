@@ -36,6 +36,8 @@ def array_plot1(arr, rows=4, cols=4):
     plt.ylabel('Signal')
     plt.title('Temporal Subspace Curves')
 
+    plt.savefig('Figure5A_IR-Subspace.eps');
+
  
 def array_plot2(arr, rows=4, cols=4):
     plt.rcParams.update({'font.size': 25})
@@ -49,6 +51,8 @@ def array_plot2(arr, rows=4, cols=4):
     #plt.legend()
     plt.ylabel('Signal')
     plt.title('Simulated Dictionary (subset)')
+
+    plt.savefig('Figure5A_IR-Dictionary.eps');
 
 #---------------------------------------------------------------#
 Signal = readcfl("./T1_dict")
@@ -82,6 +86,7 @@ plt.plot(xticks, abs(S2[0:30])/S2[-1],'b^-',linewidth=3, markersize=15)
 plt.xlabel('Principal Component')
 plt.ylabel('Percentage [100%]')
 plt.title('Accumulated PCA Coefficients')
-plt.show()
+
+plt.savefig('Figure5A_IR-Coefficients.eps');
 
 
