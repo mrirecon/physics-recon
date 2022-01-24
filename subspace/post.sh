@@ -41,6 +41,8 @@ if [ ! -e $TOOLBOX_PATH/bart ] ; then
        echo "\$TOOLBOX_PATH is not set correctly!" >&2
        exit 1
 fi
+export PATH=$TOOLBOX_PATH:$PATH
+export BART_COMPAT_VERSION="v0.6.00"
 
 # perform pixel-wise fitting to obtain (Mss, M0 R1*) map
 python3 ../utils/mapping_pixelwise.py $reco_imgs T1 $TI tmp_fit_maps

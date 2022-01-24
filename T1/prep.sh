@@ -85,6 +85,8 @@ if [ ! -e $TOOLBOX_PATH/bart ] ; then
        echo "\$TOOLBOX_PATH is not set correctly!" >&2
        exit 1
 fi
+export PATH=$TOOLBOX_PATH:$PATH
+export BART_COMPAT_VERSION="v0.6.00"
 
 
 WORKDIR=`mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir'`
@@ -127,7 +129,7 @@ bart extract 2 $((nspokes-nstate)) $nspokes dataT dataT_extract
 bart flip $(bart bitmask 2) dataT_extract dataT_extract_flip
 
 # Calculate trajectory and do gradient delay correction
-bart traj -D -r -G -x$sample_size -y1 -s$GA -t$nspokes -q $(bart estdelay traj_extract_flip dataT_extract_flip) trajn
+bart traj -D -r -G -x$sample_size -y1 -s$GA -t$nspokes -q $(DEBUG_LEVEL=0 bart estdelay traj_extract_flip dataT_extract_flip) trajn
 
 bart reshape $(bart bitmask 2 10) $nspokes_per_frame $nf1 trajn traj 
 bart transpose 5 10 traj $out_traj

@@ -15,11 +15,12 @@ __root="$(cd "$(dirname "${__dir}")" && pwd)"
 
 PI=3.14159
 
-export PATH=$TOOLBOX_PATH:$PATH
 if [ ! -e $TOOLBOX_PATH/bart ] ; then
-    echo '$TOOLBOX_PATH is not set correctly!' >&2
+    echo "\$TOOLBOX_PATH is not set correctly!" >&2
     exit 1
 fi
+export PATH="$TOOLBOX_PATH":"$PATH"
+export BART_COMPAT_VERSION="v0.6.00"
 
 WORKDIR=`mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir'`
 trap 'rm -rf "$WORKDIR"' EXIT
@@ -53,7 +54,7 @@ bart crop 6 $P eye eye_c
 bart resize -c 5 $SPOKES eye_c eye_cl
 bart fft -u $(bart bitmask 5) eye_cl $__dir/basis
 
-#GD=`bart estdelay -R -n21 -r1.5 traj meas_cc`
+#GD=`DEBUG_LEVEL=0 bart estdelay -R -n21 -r1.5 traj meas_cc`
 GD="0.114442:0.058800:-0.068824" # gradient delays were determined on the DC partition of the full 3D stack-of-stars data 
 echo $GD
 

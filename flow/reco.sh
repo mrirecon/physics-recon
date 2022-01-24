@@ -11,12 +11,12 @@
 
 set -e
 
-export PATH=$TOOLBOX_PATH:$PATH
-
 if [ ! -e $TOOLBOX_PATH/bart ] ; then
 	echo "\$TOOLBOX_PATH is not set correctly!" >&2
 	exit 1
 fi
+export PATH=$TOOLBOX_PATH:$PATH
+export BART_COMPAT_VERSION="v0.6.00"
 
 
 
@@ -53,7 +53,7 @@ rm kdat1.{cfl,hdr} kdat2.{cfl,hdr}
 # calculate trajectory
 bart traj -x $NSMP -y $NSPK -t $NFRM -s $GIND -c traj_none
 
-bart traj -x $NSMP -y $NSPK -t $NFRM -s $GIND -c -O -q $(bart estdelay -R traj_none kdat_prep) traj_ring
+bart traj -x $NSMP -y $NSPK -t $NFRM -s $GIND -c -O -q $(DEBUG_LEVEL=0 bart estdelay -R traj_none kdat_prep) traj_ring
 
 bart repmat 5 2 traj_ring traj_prep
 

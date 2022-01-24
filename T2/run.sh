@@ -7,6 +7,7 @@
 #
 set -e
 
+export BART_COMPAT_VERSION="v0.6.00"
 export PATH=$TOOLBOX_PATH:$PATH
 
 if [ ! -e $TOOLBOX_PATH/bart ] ; then
