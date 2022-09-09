@@ -27,7 +27,7 @@ trap 'rm -rf "$WORKDIR"' EXIT
 cd $WORKDIR
 
 # -------------------------------
-source $__dir/../utils/data_loc.sh
+source $__dir/../physics_utils/data_loc.sh
 RAW="${DATA_LOC}"/fmSSFP
 OUT=$__dir/"$(basename -- $RAW)-reco"
 

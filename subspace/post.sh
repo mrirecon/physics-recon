@@ -44,13 +44,32 @@ fi
 export PATH=$TOOLBOX_PATH:$PATH
 export BART_COMPAT_VERSION="v0.6.00"
 
+if ../physics_utils/version_check.sh ; then
+	RESCALE_LL=1
+else
+	RESCALE_LL=0
+fi
+
 # perform pixel-wise fitting to obtain (Mss, M0 R1*) map
-python3 ../utils/mapping_pixelwise.py $reco_imgs T1 $TI tmp_fit_maps
+python3 ../physics_utils/mapping_pixelwise.py $reco_imgs T1 $TI tmp_fit_maps
 
 # perform T1 calculation
 bart extract 2 0 3 tmp_fit_maps tmp_reco_maps1
 bart transpose 2 6 tmp_reco_maps1 tmp_reco_maps2
-bart looklocker -t0.0 -D15.3e-3 tmp_reco_maps2 tmp_T1map
+
+if [ $RESCALE_LL -eq 1 ] ; then
+	printf "%s\n" "Rescaling looklocker"
+	# work around scaling in looklocker:
+	bart slice 6 0 tmp_reco_maps2 tmp_Ms
+	bart slice 6 1 tmp_reco_maps2 tmp_M0
+	bart slice 6 2 tmp_reco_maps2 tmp_R1s
+	bart scale 2.0 tmp_M0 tmp_M0 # this scaling used to be bart of bart looklocker
+	bart join 6 tmp_Ms tmp_M0 tmp_R1s tmp_reco_maps3
+else
+	bart copy tmp_reco_maps2 tmp_reco_maps3
+fi
+
+bart looklocker -t0.0 -D15.3e-3 tmp_reco_maps3 tmp_T1map
 bart scale 0.5 tmp_T1map tmp_T1map1
 
 # masking the results

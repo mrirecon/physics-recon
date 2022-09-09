@@ -11,10 +11,6 @@ set -o pipefail
 FILE=$1
 OUT=`basename $FILE .svg`.pdf
 
-for f in Figure*.png; do
-	convert -transverse $f rot_$f
-done
-
 # Figure in Publication was generated with Inkscape 1.0 (cario 1.16.0)
 # Inkscape's CLI for pdf rendering changed,
 # to use the following command, Inkscape >= 1.0 is required

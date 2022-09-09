@@ -243,8 +243,8 @@
        id="g435"
        transform="matrix(0.21193968,0,0,0.21193969,-92.198854,192.3464)">
       <image
-         sodipodi:absref="./bSSFPsyn-deg-0_.png"
-         xlink:href="bSSFPsyn-deg-0_.png"
+         sodipodi:absref="./Figure8_bSSFP-Synth-0.png"
+         xlink:href="rot_Figure8_bSSFP-Synth-0.png"
          transform="rotate(90)"
          id="image373"
          preserveAspectRatio="none"
@@ -253,8 +253,8 @@
          x="133.26588"
          y="-777.03668" />
       <image
-         sodipodi:absref="./bSSFPsyn-deg-90_.png"
-         xlink:href="bSSFPsyn-deg-90_.png"
+         sodipodi:absref="./Figure8_bSSFP-Synth-90.png"
+         xlink:href="rot_Figure8_bSSFP-Synth-90.png"
          transform="rotate(90)"
          id="image387"
          preserveAspectRatio="none"
@@ -263,8 +263,8 @@
          x="133.26588"
          y="-887.38287" />
       <image
-         sodipodi:absref="./bSSFPsyn-deg-180_.png"
-         xlink:href="bSSFPsyn-deg-180_.png"
+         sodipodi:absref="./Figure8_bSSFP-Synth-180.png"
+         xlink:href="rot_Figure8_bSSFP-Synth-180.png"
          transform="rotate(90)"
          id="image401"
          preserveAspectRatio="none"
@@ -273,8 +273,8 @@
          x="133.26588"
          y="-997.72906" />
       <image
-         sodipodi:absref="./bSSFPsyn-deg-270_.png"
-         xlink:href="bSSFPsyn-deg-270_.png"
+         sodipodi:absref="./Figure8_bSSFP-Synth-270.png"
+         xlink:href="rot_Figure8_bSSFP-Synth-270.png"
          transform="rotate(90)"
          id="image415"
          preserveAspectRatio="none"
@@ -284,8 +284,8 @@
          y="-1108.0754" />
     </g>
     <image
-       sodipodi:absref="./RSS_magn.png"
-       xlink:href="RSS_magn.png"
+       sodipodi:absref="./rot_Figure8_RSS.png"
+       xlink:href="rot_Figure8_RSS.png"
        y="-200.02473"
        x="160.12317"
        width="46.773003"
@@ -917,8 +917,8 @@
            id="g429"
            transform="translate(-11.985916,-539.71604)">
           <image
-             sodipodi:absref="./reco_phas_o0000.png"
-             xlink:href="reco_phas_o0000.png"
+             sodipodi:absref="./Figure8_phase_o0000.png"
+             xlink:href="rot_Figure8_phase_o0000.png"
              transform="rotate(90)"
              id="image261"
              preserveAspectRatio="none"
@@ -927,8 +927,8 @@
              x="-78.980354"
              y="-1189.8164" />
           <image
-             sodipodi:absref="./reco_phas_o0001.png"
-             xlink:href="reco_phas_o0001.png"
+             sodipodi:absref="./Figure8_phase_o0001.png"
+             xlink:href="rot_Figure8_phase_o0001.png"
              transform="rotate(90)"
              id="image275"
              preserveAspectRatio="none"
@@ -937,8 +937,8 @@
              x="-78.980354"
              y="-1079.4701" />
           <image
-             sodipodi:absref="./reco_phas_o0002.png"
-             xlink:href="reco_phas_o0002.png"
+             sodipodi:absref="./Figure8_phase_o0002.png"
+             xlink:href="rot_Figure8_phase_o0002.png"
              transform="rotate(90)"
              id="image289"
              preserveAspectRatio="none"
@@ -947,8 +947,8 @@
              x="-78.980354"
              y="-969.12384" />
           <image
-             sodipodi:absref="./reco_phas_o0003.png"
-             xlink:href="reco_phas_o0003.png"
+             sodipodi:absref="./Figure8_phase_o0003.png"
+             xlink:href="rot_Figure8_phase_o0003.png"
              transform="rotate(90)"
              id="image303"
              preserveAspectRatio="none"
@@ -961,8 +961,8 @@
            transform="translate(57.47353,-335.36389)"
            id="g423">
           <image
-             sodipodi:absref="./reco_magn_o0000.png"
-             xlink:href="reco_magn_o0000.png"
+             sodipodi:absref="./Figure8_magn_o0000.png"
+             xlink:href="rot_Figure8_magn_o0000.png"
              transform="rotate(90)"
              id="image317"
              preserveAspectRatio="none"
@@ -971,8 +971,8 @@
              x="-393.67874"
              y="-1120.3569" />
           <image
-             sodipodi:absref="./reco_magn_o0001.png"
-             xlink:href="reco_magn_o0001.png"
+             sodipodi:absref="./Figure8_magn_o0001.png"
+             xlink:href="rot_Figure8_magn_o0001.png"
              transform="rotate(90)"
              id="image331"
              preserveAspectRatio="none"
@@ -981,8 +981,8 @@
              x="-393.67874"
              y="-1010.0107" />
           <image
-             sodipodi:absref="./reco_magn_o0002.png"
-             xlink:href="reco_magn_o0002.png"
+             sodipodi:absref="./Figure8_magn_o0002.png"
+             xlink:href="rot_Figure8_magn_o0002.png"
              transform="rotate(90)"
              id="image345"
              preserveAspectRatio="none"
@@ -991,8 +991,8 @@
              x="-393.67874"
              y="-899.66443" />
           <image
-             sodipodi:absref="./reco_magn_o0003.png"
-             xlink:href="reco_magn_o0003.png"
+             sodipodi:absref="./Figure8_magn_o0003.png"
+             xlink:href="rot_Figure8_magn_o0003.png"
              transform="rotate(90)"
              id="image359"
              preserveAspectRatio="none"
@@ -1078,8 +1078,8 @@
        transform="matrix(0.46036421,0,0,0.46036421,1.4443967,77.955694)"
        id="g469">
       <image
-         sodipodi:absref="./mask.png"
-         xlink:href="mask.png"
+         sodipodi:absref="./Figure8_mask.png"
+         xlink:href="rot_Figure8_mask.png"
          transform="rotate(90)"
          id="image443"
          preserveAspectRatio="none"
@@ -1088,8 +1088,8 @@
          x="-104.62339"
          y="-109.27853" />
       <image
-         sodipodi:absref="./mask.png"
-         xlink:href="mask.png"
+         sodipodi:absref="./Figure8_mask.png"
+         xlink:href="rot_Figure8_mask.png"
          y="-160.07852"
          x="-104.62339"
          width="50.799999"
@@ -1098,8 +1098,8 @@
          id="image447"
          transform="rotate(90)" />
       <image
-         sodipodi:absref="./mask.png"
-         xlink:href="mask.png"
+         sodipodi:absref="./Figure8_mask.png"
+         xlink:href="rot_Figure8_mask.png"
          transform="rotate(90)"
          id="image449"
          preserveAspectRatio="none"
@@ -1108,8 +1108,8 @@
          x="-104.62339"
          y="-210.87852" />
       <image
-         sodipodi:absref="./mask.png"
-         xlink:href="mask.png"
+         sodipodi:absref="./Figure8_mask.png"
+         xlink:href="rot_Figure8_mask.png"
          y="-261.67853"
          x="-104.62339"
          width="50.799999"
@@ -1118,8 +1118,8 @@
          id="image451"
          transform="rotate(90)" />
       <image
-         sodipodi:absref="./mask.png"
-         xlink:href="mask.png"
+         sodipodi:absref="./Figure8_mask.png"
+         xlink:href="rot_Figure8_mask.png"
          y="-109.27853"
          x="-155.42339"
          width="50.799999"
@@ -1128,8 +1128,8 @@
          id="image453"
          transform="rotate(90)" />
       <image
-         sodipodi:absref="./mask.png"
-         xlink:href="mask.png"
+         sodipodi:absref="./Figure8_mask.png"
+         xlink:href="rot_Figure8_mask.png"
          transform="rotate(90)"
          id="image455"
          preserveAspectRatio="none"
@@ -1138,8 +1138,8 @@
          x="-155.42339"
          y="-160.07852" />
       <image
-         sodipodi:absref="./mask.png"
-         xlink:href="mask.png"
+         sodipodi:absref="./Figure8_mask.png"
+         xlink:href="rot_Figure8_mask.png"
          y="-210.87852"
          x="-155.42339"
          width="50.799999"
@@ -1148,8 +1148,8 @@
          id="image457"
          transform="rotate(90)" />
       <image
-         sodipodi:absref="./mask.png"
-         xlink:href="mask.png"
+         sodipodi:absref="./Figure8_mask.png"
+         xlink:href="rot_Figure8_mask.png"
          transform="rotate(90)"
          id="image459"
          preserveAspectRatio="none"

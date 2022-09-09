@@ -16,6 +16,13 @@ fi
 export PATH=$TOOLBOX_PATH:$PATH
 export BART_COMPAT_VERSION="v0.6.00"
 
+if ../physics_utils/version_check.sh ; then
+	ADD_OPTS="--normalize_scaling --other pinit=1:1.5:1:1 --scale_data 5000 --scale_psf 1000"
+else
+	ADD_OPTS=""
+fi
+echo $ADD_OPTS
+
 # generating a numerical phantom using BART
 # Simulation parameters
 TE=0.0099
@@ -72,7 +79,7 @@ bart scale $TE tmp1.coo TE
 ITER=15
 
 REG=0.004
-bart moba -F -l1 -i$ITER -C400 -d4 -j$REG -g -o1.0 -B0.1 -n -t traj phantom_ksp TE moba_simu_T2 sens
+bart moba  $ADD_OPTS -F -l1 -i$ITER -C400 -d4 -j$REG -g -o1.0 -B0.1 -n -t traj phantom_ksp TE moba_simu_T2 sens
 
 bart resize -c 0 $NBR 1 $NBR moba_simu_T2 moba_simu_T2_${NBR}
 

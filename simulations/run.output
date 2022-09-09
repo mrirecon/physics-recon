@@ -1,0 +1,14 @@
+moba_simu_T1	0.0005	CFL_NRMSE
+moba_simu_T2	0.0005	CFL_NRMSE
+moba_reco_0	0.0005	CFL_NRMSE
+moba_reco_1	0.0005	CFL_NRMSE
+moba_reco_2	0.0005	CFL_NRMSE
+moba_reco_3	0.0005	CFL_NRMSE
+subspace_reco_C2	0.0005	CFL_NRMSE
+subspace_reco_C3	0.0005	CFL_NRMSE
+subspace_reco_C4	0.0005	CFL_NRMSE
+subspace_reco_C5	0.0005	CFL_NRMSE
+subspace_reco_R0	0.0005	CFL_NRMSE
+subspace_reco_R1	0.0005	CFL_NRMSE
+subspace_reco_R2	0.0005	CFL_NRMSE
+subspace_reco_R3	0.0005	CFL_NRMSE

@@ -2,10 +2,10 @@
 
 set +u
 
-REPO_NAME=nonlinear-physics
+FOLDER=$(dirname $(readlink -f $BASH_SOURCE))
+REPO_NAME=$(<"$FOLDER"/../meta/name)
 
 if [ ! -d ${DATA_ARCHIVE}/${REPO_NAME} ] ; then
-        FOLDER=$(dirname $(readlink -f $BASH_SOURCE))
         DATA_LOC=$(realpath "$FOLDER"/../data)
 else
         DATA_LOC=${DATA_ARCHIVE}/${REPO_NAME}

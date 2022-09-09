@@ -29,6 +29,16 @@ cfl2png -z1 -A -l0 -u2.0 Figure7B_Bottom Figure7B_Bottom.png
 
 # output T1 map with colormap
 bart transpose 0 1 tmp_T1_1 Moba_T1
-python3 ../utils/save_maps.py Moba_T1 viridis 0 2.0 Figure2B-7B_Moba-T1.png
+python3 ../physics_utils/save_maps.py Moba_T1 viridis 0 2.0 Figure2B-7B_Moba-T1.png
+
+# output individual maps for svg
+cfl2png -z1 -A -l0 -u2.0 tmp_Mss_1 Figure2B_Top_Ms.png
+cfl2png -z1 -A -l0 -u2.0 tmp_M0_1 Figure2B_Top_M0.png
+cfl2png -z1 -A -l0 -u2.0 tmp_R1s_1 Figure2B_Top_R1s.png
+
+cfl2png -z1 -A -l0 -u2.0 Moba_Synth40 Figure7B_Moba_Synth40.png
+cfl2png -z1 -A -l0 -u2.0 Moba_Synth400 Figure7B_Moba_Synth400.png
+cfl2png -z1 -A -l0 -u2.0 Moba_Synth800 Figure7B_Moba_Synth800.png
+cfl2png -z1 -A -l0 -u2.0 Moba_Synth4000 Figure7B_Moba_Synth4000.png
 
 rm tmp*.{hdr,cfl}

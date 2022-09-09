@@ -15,8 +15,15 @@ if [ ! -e $TOOLBOX_PATH/bart ] ; then
 	exit 1
 fi
 
+if ../physics_utils/version_check.sh ; then
+	ADD_OPTS="--normalize_scaling --other pinit=1:1.5:1:1 --scale_data 5000 --scale_psf 1000 --img_dims 320:320:1"
+else
+	ADD_OPTS=""
+fi
+echo $ADD_OPTS
 
-source ../utils/data_loc.sh
+
+source ../physics_utils/data_loc.sh
 RAW="${DATA_LOC}"/ME-SE
 
 READ=$(bart show -d0 $RAW)
@@ -34,7 +41,7 @@ NSPK=$NEXC
 
 ./prep.sh -s$READ -R$TE -G$GA -p$PHS1 -f$NEXC -e$NECO $RAW T2-data.coo T2-traj.coo T2-TE
 
-bart moba -F -i10 -n -C300 -j$lambda -d4 -g -t T2-traj.coo T2-data.coo T2-TE T2-reco T2-sens.coo
+bart moba -F -i10 -n -C300 -j$lambda -d4 -g $ADD_OPTS -o $og -t T2-traj.coo T2-data.coo T2-TE T2-reco T2-sens.coo
 
 bart resize -c 0 $NBR 1 $NBR T2-reco tmp_maps
 

@@ -67,7 +67,12 @@ fi
 export PATH=$TOOLBOX_PATH:$PATH
 export BART_COMPAT_VERSION="v0.6.00"
 
-
+if ../physics_utils/version_check.sh ; then
+	ADD_OPTS="--normalize_scaling --other pinit=1:1:1.5:1 --scale_data 5000 --scale_psf 1000 --img_dims 320:320:1"
+else
+	ADD_OPTS=""
+fi
+echo $ADD_OPTS
 
 #WORKDIR=$(mktemp -d)
 # Mac: http://unix.stackexchange.com/questions/30091/fix-or-alternative-for-mktemp-in-os-x
@@ -83,7 +88,8 @@ START=$(date +%s)
 which bart
 bart version
 
-OMP_NUM_THREADS=30 nice -n10 bart moba -L -g -i10 -d4 -B0.3 -C300 -s0.475 -k -R3 -o1.25 -j$lambda -n -t $traj $ksp $TI $reco $sens
+
+OMP_NUM_THREADS=1 nice -n10 bart moba -L -g -i10 -d4 -B0.3 -C300 -s0.475 -k -R3 -o1.25 $ADD_OPTS -j$lambda -n -t $traj $ksp $TI $reco $sens
 
 END=$(date +%s)
 DIFF=$(($END - $START))

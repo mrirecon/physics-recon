@@ -1,0 +1,3 @@
+T1-reco			0.0007	CFL_NRMSE
+synthesized_T1_images	0.0007	CFL_NRMSE
+T1-reco_t1map		0.009	CFL_NRMSE

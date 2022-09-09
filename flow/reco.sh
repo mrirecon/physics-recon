@@ -18,9 +18,14 @@ fi
 export PATH=$TOOLBOX_PATH:$PATH
 export BART_COMPAT_VERSION="v0.6.00"
 
+if ../physics_utils/version_check.sh ; then
+	ADD_OPTS="--normalize_scaling --scale_data 5000 --scale_psf 1000"
+else
+	ADD_OPTS=""
+fi
+echo $ADD_OPTS
 
-
-source ../utils/data_loc.sh
+source ../physics_utils/data_loc.sh
 RAW="${DATA_LOC}"/PC-FLASH
 
 # create venc index array
@@ -58,7 +63,7 @@ bart traj -x $NSMP -y $NSPK -t $NFRM -s $GIND -c -O -q $(DEBUG_LEVEL=0 bart estd
 bart repmat 5 2 traj_ring traj_prep
 
 # --- model-based velocity mapping ---
-bart moba -G -m4 --sobolev_a 220 -b0:1 -i6 -R2 -d4 -g -o1.5 -t traj_prep kdat_prep VENC_ARRAY R_M4
+bart moba $ADD_OPTS -G -m4 --sobolev_a 220 -b0:1 -i6 -R2 -d4 -g -o1.5 -t traj_prep kdat_prep VENC_ARRAY R_M4
 
 # crop images
 bart resize -c 0 $BASERES 1 $BASERES R_M4 R_PHASE_CONTRAST

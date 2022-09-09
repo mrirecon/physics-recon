@@ -29,7 +29,24 @@ cfl2png -z1 -A -l0 -u2.0 Figure7B_Top Figure7B_Top.png
 
 # output the T1 map with colormap
 bart transpose 0 1 tmp_subspace-T1map Subspace_T1
-python3 ../utils/save_maps.py Subspace_T1 viridis 0 2.0 Figure7B_Subspace-T1.png
+python3 ../physics_utils/save_maps.py Subspace_T1 viridis 0 2.0 Figure7B_Subspace-T1.png
+
+# output individual maps for svg
+NBR=$(bart show -d0 coeff0)
+
+for (( i=0; i<4; i++ ));
+do      
+        bart extract 1 0 $((NBR/2)) tmp_coeff${i} tmp
+        python3 ../physics_utils/save_maps.py tmp gray 0 1.5e-4 coeff${i}.png
+        bart extract 1 $((NBR/2)) $((NBR)) tmp_coeff${i} tmp
+        python3 ../physics_utils/save_maps.py tmp gray 0 3e-5 coeff${i}_x5.png
+done
+
+cfl2png -z1 -A -l0 -u2.0 Subspace_Synth40 Figure7B_Subspace_Synth40.png
+cfl2png -z1 -A -l0 -u2.0 Subspace_Synth400 Figure7B_Subspace_Synth400.png
+cfl2png -z1 -A -l0 -u2.0 Subspace_Synth800 Figure7B_Subspace_Synth800.png
+cfl2png -z1 -A -l0 -u2.0 Subspace_Synth4000 Figure7B_Subspace_Synth4000.png
+
 
 # create plots
 python3 plot_subspace_T1.py

@@ -64,7 +64,7 @@ for (( i=2; i <= 5; i++)) ; do
         # perform pixel-wise fitting to obtain T1 map
         bart fmac -s $(bart bitmask 6) basis_${i} tmp_masked imgs_C${i}
 
-        python3 ../utils/mapping_pixelwise.py imgs_C${i} T1 TI maps_C${i}
+        python3 ../physics_utils/mapping_pixelwise.py imgs_C${i} T1 TI maps_C${i}
 
         bart extract 2 0 3 maps_C${i} tmp1
         bart transpose 2 6 tmp1 tmp2
@@ -95,7 +95,7 @@ do
         # perform pixel-wise fitting to obtain T1 map
         bart fmac -s $(bart bitmask 6) basis_${nCoe} tmp_masked imgs_R${i}
 
-        python3 ../utils/mapping_pixelwise.py imgs_R${i} T1 TI maps_R${i}
+        python3 ../physics_utils/mapping_pixelwise.py imgs_R${i} T1 TI maps_R${i}
 
         bart extract 2 0 3 maps_R${i} tmp1
         bart transpose 2 6 tmp1 tmp2

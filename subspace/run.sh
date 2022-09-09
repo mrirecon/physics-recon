@@ -16,7 +16,7 @@ export PATH=$TOOLBOX_PATH:$PATH
 export BART_COMPAT_VERSION="v0.6.00"
 
 
-source ../utils/data_loc.sh
+source ../physics_utils/data_loc.sh
 RAW="${DATA_LOC}"/IR-FLASH
 READ=$(bart show -d0 $RAW)
 PHS1=$(bart show -d1 $RAW)
@@ -38,7 +38,7 @@ bart scale 2. ../T1/T1-sens tmp_sens
 
 ./post.sh reco_imgs T1-TI T1-subspace-T1map T1-subspace-imgs T1-subspace-coeff-maps
 
-rm tmp*.{cfl,hdr} T1-*.coo T1-TI.{cfl,hdr}
+rm tmp*.{cfl,hdr} T1-*.coo
 
 
 # create plots

@@ -16,7 +16,7 @@ fi
 export PATH=$TOOLBOX_PATH:$PATH
 export BART_COMPAT_VERSION="v0.6.00"
 
-ORIENT="-x1 -y0 -FXY"
+ORIENT="-x1 -y0 -FZ"
 
 # write out pngs
 cfl2png $ORIENT -z1 -CM reco_rss Figure8_RSS

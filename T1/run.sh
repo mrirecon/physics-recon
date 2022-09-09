@@ -16,7 +16,7 @@ export PATH=$TOOLBOX_PATH:$PATH
 export BART_COMPAT_VERSION="v0.6.00"
 
 
-source ../utils/data_loc.sh
+source ../physics_utils/data_loc.sh
 RAW="${DATA_LOC}"/IR-FLASH
 READ=$(bart show -d0 $RAW)
 PHS1=$(bart show -d1 $RAW)

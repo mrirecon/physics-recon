@@ -19,9 +19,14 @@ fi
 export PATH=$TOOLBOX_PATH:$PATH
 export BART_COMPAT_VERSION="v0.6.00"
 
+if ../physics_utils/version_check.sh ; then
+	ADD_OPTS="--normalize_scaling --scale_data 5000 --scale_psf 1000"
+else
+	ADD_OPTS=""
+fi
+echo $ADD_OPTS
 
-
-source ../utils/data_loc.sh
+source ../physics_utils/data_loc.sh
 RAW="${DATA_LOC}"/ME-FLASH
 
 # --- dimensions ---
@@ -84,7 +89,7 @@ for (( F=0; F < $NMEA; F +=1 )); do
 	bart extract 5 0 3 traj_1f traj_1fe
 	bart extract 5 0 3 kdat_1f kdat_1fe
 
-	bart moba -O -G -m0 -i6 -R2 --fat_spec_0 -g -o$OVERGRID -t traj_1fe kdat_1fe TE_e R_m0_1fe
+	bart moba $ADD_OPTS -O -G -m0 -i6 -R2 --fat_spec_0 -g -o$OVERGRID -t traj_1fe kdat_1fe TE_e R_m0_1fe
 
 	bart extract 6 0 2 R_m0_1fe temp_init_wf
 	bart extract 6 2 3 R_m0_1fe temp_init_fB0
@@ -98,7 +103,7 @@ for (( F=0; F < $NMEA; F +=1 )); do
 
 	# moba reconstruction: multi-echo R2* mapping
 
-	bart moba -G -m1 -rQ:1 -rS:0 -rW:3:$(bart bitmask 6):1 -u0.01 -i8 -C100 -R3 --fat_spec_0 -k --kfilter-2 -d4 -g -o$OVERGRID -I R_M1_init_F${FF}.coo -t traj_1f kdat_1f TE R_M1_F${FF}.coo
+	bart moba $ADD_OPTS  -G -m1 -rQ:1 -rS:0 -rW:3:$(bart bitmask 6):1 -u0.01 -i8 -C100 -R3 --fat_spec_0 -k --kfilter-2 -d4 -g -o$OVERGRID -I R_M1_init_F${FF}.coo -t traj_1f kdat_1f TE R_M1_F${FF}.coo
 
 done
 

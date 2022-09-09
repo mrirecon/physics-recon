@@ -1,0 +1,8 @@
+./flow/run_fig.sh
+./fmSSFP/run_fig.sh
+./simulations/run_fig.sh
+./T1/run_fig.sh
+./T2/run_fig.sh
+./subspace/run_fig.sh
+./water-fat/run_fig.sh
+./pdfs/run_fig.sh

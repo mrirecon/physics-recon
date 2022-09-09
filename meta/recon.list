@@ -1,0 +1,7 @@
+./flow/run.sh
+./fmSSFP/run.sh
+./simulations/run.sh
+./T1/run.sh
+./T2/run.sh
+./subspace/run.sh
+./water-fat/run.sh
