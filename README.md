@@ -15,6 +15,8 @@ will download all data from this address into the subfolder `data`.
 
 The script `all.sh` can be used to run all reconstructions.
 
+Total runtime of these scripts should around 30 min to 1.5 h.
+
 # BART version
 
 All reconstructions are based on the Berkeley Advanced Reconstruction Toolbox
