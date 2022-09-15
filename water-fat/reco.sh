@@ -28,6 +28,11 @@ echo $ADD_OPTS
 
 source ../physics_utils/data_loc.sh
 RAW="${DATA_LOC}"/ME-FLASH
+if [ ! -f "$RAW".cfl ] ; then
+	printf "Error: Rawdata %s not found, either download is using load_all.sh or set DATA_ARCHIVE correctly!\n" "$RAW" >&2
+	exit 1
+fi
+
 
 # --- dimensions ---
 NSMP=$(bart show -d  0 $RAW)

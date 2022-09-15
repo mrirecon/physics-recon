@@ -25,6 +25,11 @@ echo $ADD_OPTS
 
 source ../physics_utils/data_loc.sh
 RAW="${DATA_LOC}"/ME-SE
+if [ ! -f "$RAW".cfl ] ; then
+	printf "Error: Rawdata %s not found, either download is using load_all.sh or set DATA_ARCHIVE correctly!\n" "$RAW" >&2
+	exit 1
+fi
+
 
 READ=$(bart show -d0 $RAW)
 PHS1=$(bart show -d1 $RAW)
