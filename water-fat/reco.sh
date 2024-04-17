@@ -19,12 +19,19 @@ fi
 export PATH=$TOOLBOX_PATH:$PATH
 export BART_COMPAT_VERSION="v0.6.00"
 
-if ../physics_utils/version_check.sh ; then
-	ADD_OPTS="--normalize_scaling --scale_data 5000 --scale_psf 1000"
-else
-	ADD_OPTS=""
+ADD_OPTS=""
+if ../physics_utils/nscaling_version_check.sh ; then
+	ADD_OPTS+="--normalize_scaling --scale_data 5000 --scale_psf 1000 "
+fi
+if ../physics_utils/dampen_version_check.sh ; then
+	ADD_OPTS+="-T 0.9"
 fi
 echo $ADD_OPTS
+
+if ../physics_utils/gpu_check.sh ; then
+       echo "bart with GPU support is required!" >&2
+       exit 1
+fi
 
 source ../physics_utils/data_loc.sh
 RAW="${DATA_LOC}"/ME-FLASH

@@ -7,7 +7,7 @@
 # xiaoqing.wang@med.uni-goettingen.de
 #
 
-set -e
+set -euo pipefail
 
 if [ ! -e $TOOLBOX_PATH/bart ] ; then
     echo "\$TOOLBOX_PATH is not set correctly!" >&2
@@ -16,12 +16,18 @@ fi
 export PATH=$TOOLBOX_PATH:$PATH
 export BART_COMPAT_VERSION="v0.6.00"
 
-if ../physics_utils/version_check.sh ; then
-	ADD_OPTS="--normalize_scaling --other pinit=1:1.5:1:1 --scale_data 5000 --scale_psf 1000"
+if ../physics_utils/nscaling_version_check.sh ; then
+	MOBA_ADD_OPTS="--normalize_scaling --other pinit=1:1.5:1:1 --scale_data 5000 --scale_psf 1000"
 else
-	ADD_OPTS=""
+	MOBA_ADD_OPTS=""
 fi
-echo $ADD_OPTS
+echo $MOBA_ADD_OPTS
+
+
+if ../physics_utils/gpu_check.sh ; then
+       echo "bart with GPU support is required!" >&2
+       exit 1
+fi
 
 # generating a numerical phantom using BART
 # Simulation parameters
@@ -41,8 +47,15 @@ bart scale 0.5 traj _traj1
 bart phantom -s$NC -T -k -b -t _traj1 _basis_geom
 
 # create simulation basis functions
-bart signal -T -n$NECO -e$TE  -1 1:1:1 -2 1:1:1 _basis_simu_water
-bart signal -T -n$NECO -e$TE  -1 1:1:1 -2 0.02:0.22:10 _basis_simu_tubes
+if bart version -t v0.9.00 ;
+then
+	bart signal -S -n$NECO -e$TE  -1 1:1:1 -2 1:1:1 _basis_simu_water
+	bart signal -S -n$NECO -e$TE  -1 1:1:1 -2 0.02:0.22:10 _basis_simu_tubes
+else
+	bart signal -T -n$NECO -e$TE  -1 1:1:1 -2 1:1:1 _basis_simu_water
+	bart signal -T -n$NECO -e$TE  -1 1:1:1 -2 0.02:0.22:10 _basis_simu_tubes
+fi
+
 
 bart join 7 _basis_simu_water _basis_simu_tubes _basis_simu
 bart transpose 6 7 _basis_simu _basis_simu1
@@ -79,7 +92,7 @@ bart scale $TE tmp1.coo TE
 ITER=15
 
 REG=0.004
-bart moba  $ADD_OPTS -F -l1 -i$ITER -C400 -d4 -j$REG -g -o1.0 -B0.1 -n -t traj phantom_ksp TE moba_simu_T2 sens
+bart moba $MOBA_ADD_OPTS -F -l1 -i$ITER -C400 -d4 -j$REG -g -o1.0 -B0.1 -n -t traj phantom_ksp TE moba_simu_T2 sens
 
 bart resize -c 0 $NBR 1 $NBR moba_simu_T2 moba_simu_T2_${NBR}
 

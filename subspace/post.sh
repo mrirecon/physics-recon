@@ -44,7 +44,7 @@ fi
 export PATH=$TOOLBOX_PATH:$PATH
 export BART_COMPAT_VERSION="v0.6.00"
 
-if ../physics_utils/version_check.sh ; then
+if ../physics_utils/nscaling_version_check.sh ; then
 	RESCALE_LL=1
 else
 	RESCALE_LL=0

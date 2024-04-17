@@ -18,12 +18,21 @@ fi
 export PATH=$TOOLBOX_PATH:$PATH
 export BART_COMPAT_VERSION="v0.6.00"
 
-if ../physics_utils/version_check.sh ; then
-	ADD_OPTS="--normalize_scaling --scale_data 5000 --scale_psf 1000"
-else
-	ADD_OPTS=""
+SCALE_OPTS=""
+if ../physics_utils/nscaling_version_check.sh ; then
+	SCALE_OPTS="--normalize_scaling --scale_data 5000 --scale_psf 1000 "
 fi
-echo $ADD_OPTS
+TD_OPTS=""
+if ../physics_utils/dampen_version_check.sh ; then
+	TD_OPTS="-T 0.9"
+fi
+echo $SCALE_OPTS $TD_OPTS
+
+
+if ../physics_utils/gpu_check.sh ; then
+       echo "bart with GPU support is required!" >&2
+       exit 1
+fi
 
 source ../physics_utils/data_loc.sh
 RAW="${DATA_LOC}"/PC-FLASH
@@ -68,7 +77,7 @@ bart traj -x $NSMP -y $NSPK -t $NFRM -s $GIND -c -O -q $(DEBUG_LEVEL=0 bart estd
 bart repmat 5 2 traj_ring traj_prep
 
 # --- model-based velocity mapping ---
-bart moba $ADD_OPTS -G -m4 --sobolev_a 220 -b0:1 -i6 -R2 -d4 -g -o1.5 -t traj_prep kdat_prep VENC_ARRAY R_M4
+bart moba $SCALE_OPTS $TD_OPTS -G -m4 --sobolev_a 220 -b0:1 -i6 -R2 -d4 -g -o1.5 -t traj_prep kdat_prep VENC_ARRAY R_M4
 
 # crop images
 bart resize -c 0 $BASERES 1 $BASERES R_M4 R_PHASE_CONTRAST
@@ -82,7 +91,7 @@ bart scale .3 PHI VEL
 rm PHI.{cfl,hdr} R_M4.{cfl,hdr}
 
 # --- parallel imaging reconstruction ---
-bart moba -G -m5 --sobolev_a 220 -i6 -R2 -d4 -g -o1.5 -t traj_prep kdat_prep VENC_ARRAY R_M5
+bart moba $TD_OPTS -G -m5 --sobolev_a 220 -i6 -R2 -d4 -g -o1.5 -t traj_prep kdat_prep VENC_ARRAY R_M5
 
 # crop images
 bart resize -c 0 $BASERES 1 $BASERES R_M5 R_M5_crop

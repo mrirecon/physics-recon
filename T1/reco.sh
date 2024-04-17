@@ -67,12 +67,17 @@ fi
 export PATH=$TOOLBOX_PATH:$PATH
 export BART_COMPAT_VERSION="v0.6.00"
 
-if ../physics_utils/version_check.sh ; then
+if ../physics_utils/nscaling_version_check.sh ; then
 	ADD_OPTS="--normalize_scaling --other pinit=1:1:1.5:1 --scale_data 5000 --scale_psf 1000 --img_dims 320:320:1"
 else
 	ADD_OPTS=""
 fi
 echo $ADD_OPTS
+
+if ! ../physics_utils/gpu_check.sh ; then
+       echo "bart with GPU support is required!" >&2
+       exit 1
+fi
 
 #WORKDIR=$(mktemp -d)
 # Mac: http://unix.stackexchange.com/questions/30091/fix-or-alternative-for-mktemp-in-os-x

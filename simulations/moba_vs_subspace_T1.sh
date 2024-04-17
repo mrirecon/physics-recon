@@ -7,7 +7,7 @@
 # xiaoqing.wang@med.uni-goettingen.de
 #
 
-set -e
+set -euo pipefail
 
 if [ ! -e $TOOLBOX_PATH/bart ] ; then
     echo "\$TOOLBOX_PATH is not set correctly!" >&2
@@ -16,12 +16,24 @@ fi
 export PATH=$TOOLBOX_PATH:$PATH
 export BART_COMPAT_VERSION="v0.6.00"
 
-if ../physics_utils/version_check.sh ; then
-	ADD_OPTS="--normalize_scaling --other pinit=1:1:1.5:1 --scale_data 5000 --scale_psf 1000"
+if ../physics_utils/nscaling_version_check.sh ; then
+	MOBA_ADD_OPTS="--normalize_scaling --other pinit=1:1:1.5:1 --scale_data 5000 --scale_psf 1000"
 else
-	ADD_OPTS=""
+	MOBA_ADD_OPTS=""
 fi
-echo $ADD_OPTS
+echo $MOBA_ADD_OPTS
+
+if ../physics_utils/simu_short_TR_version_check.sh ; then
+	SIGNAL_ADD_OPTS="--short-TR-LL-approx"
+else
+	SIGNAL_ADD_OPTS=""
+fi
+echo $SIGNAL_ADD_OPTS
+
+if ../physics_utils/gpu_check.sh ; then
+       echo "bart with GPU support is required!" >&2
+       exit 1
+fi
 
 # generating a numerical phantom using BART
 # Simulation parameters
@@ -41,8 +53,8 @@ bart scale 0.5 traj traj1
 bart phantom -s$NC -T -k -b -t traj1 _basis_geom
 
 # create simulation basis functions
-bart signal -F -I -n$REP -r$TR  -1 3:3:1 -2 1:1:1 _basis_simu_water
-bart signal -F -I -n$REP -r$TR  -1 0.2:2.2:10 -2 0.045:0.045:1 _basis_simu_tubes
+bart signal $SIGNAL_ADD_OPTS -F -I -n$REP -r$TR  -1 3:3:1 -2 1:1:1 _basis_simu_water
+bart signal $SIGNAL_ADD_OPTS -F -I -n$REP -r$TR  -1 0.2:2.2:10 -2 0.045:0.045:1 _basis_simu_tubes
 
 bart scale 1. _basis_simu_tubes _basis_simu_sdim_tubes
 bart join 6 _basis_simu_water _basis_simu_sdim_tubes _basis_simu
@@ -92,7 +104,7 @@ ITER=10
 for (( i=0; i<${#array}; i++ ));
 do      
         REG=${array[i]}
-        bart moba $ADD_OPTS -L -l2 -i$ITER -k -g -C300 -d4 -j$REG -o1.0 -R3 -n -t traj phantom_ksp_1 TI moba_reco_${i} sens_${i}
+        bart moba $MOBA_ADD_OPTS -L -l2 -i$ITER -k -g -C300 -d4 -j$REG -o1.0 -R3 -n -t traj phantom_ksp_1 TI moba_reco_${i} sens_${i}
 done
 
 #-----------------------------------------------
@@ -103,7 +115,7 @@ done
 nR1s=1000
 nMss=100
 TR2=$TR
-bart signal -F -I -1 5e-3:5:$nR1s -3 1e-2:1:$nMss -r$TR2 -n$REP dicc
+bart signal $SIGNAL_ADD_OPTS -F -I -1 5e-3:5:$nR1s -3 1e-2:1:$nMss -r$TR2 -n$REP dicc
 
 bart reshape $(bart bitmask 6 7) $((nR1s * nMss)) 1 dicc dicc1
 bart squeeze dicc1 dicc2
