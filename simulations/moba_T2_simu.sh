@@ -24,7 +24,7 @@ fi
 echo $MOBA_ADD_OPTS
 
 
-if ../physics_utils/gpu_check.sh ; then
+if ! ../physics_utils/gpu_check.sh ; then
        echo "bart with GPU support is required!" >&2
        exit 1
 fi
