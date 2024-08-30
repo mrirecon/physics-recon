@@ -1,8 +1,2 @@
-## bart nrmse -t 0.00001 /home/ague/archive/projects/2020/Physics-Recon/flow_model/MAG MAG	-t	CFL_NRMSE
-## bart nrmse -t 0.0001 /home/ague/archive/projects/2020/Physics-Recon/flow_model/VEL VEL	-t	CFL_NRMSE
-#bart nrmse -t 0.00009 /home/ague/archive/projects/2021/physics-recon_rev3/Figure4/R_PHASE_CONTRAST R_PHASE_CONTRAST	0.00009	CFL_NRMSE
-##bart nrmse -t 0.00004 /home/ague/archive/projects/2021/physics-recon_rev3/Figure4/R_PHASE_DIFFERENCE R_PHASE_DIFFERENCE	0.00004	CFL_NRMSE
-#bart nrmse -t 0.00012 /home/ague/archive/projects/2021/physics-recon_rev3/Figure4/R_PHASE_DIFFERENCE R_PHASE_DIFFERENCE	0.00012	CFL_NRMSE
-
-R_PHASE_CONTRAST	0.00009	CFL_NRMSE
-R_PHASE_DIFFERENCE	0.00012	CFL_NRMSE
+R_PHASE_CONTRAST	0.00010	CFL_NRMSE_EXTRACT 10 0 100
+R_PHASE_DIFFERENCE	0.00012	CFL_NRMSE_EXTRACT 10 0 100

@@ -22,6 +22,7 @@ SCALE_OPTS=""
 if ../physics_utils/nscaling_version_check.sh ; then
 	SCALE_OPTS="--normalize_scaling --scale_data 5000 --scale_psf 1000 "
 fi
+
 TD_OPTS=""
 if ../physics_utils/dampen_version_check.sh ; then
 	TD_OPTS="-T 0.9"
@@ -33,6 +34,7 @@ if ! ../physics_utils/gpu_check.sh ; then
        echo "bart with GPU support is required!" >&2
        exit 1
 fi
+
 
 source ../physics_utils/data_loc.sh
 RAW="${DATA_LOC}"/PC-FLASH
@@ -60,12 +62,11 @@ NSPK=$(bart show -d  1 $RAW)
 NFRM=$(bart show -d 10 $RAW)
 
 BASERES=$(( NSMP / 2 ))
-OVERGRID=1.5
 
 bart reshape $(bart bitmask 0 1 2) 1 $NSMP $NSPK $RAW kdat1
 
 bart cc -A -p 10 kdat1 kdat2
-bart transpose 5 11 kdat2 kdat_prep
+bart transpose 5 11 kdat2 kdat_prep1
 
 rm kdat1.{cfl,hdr} kdat2.{cfl,hdr}
 
@@ -74,7 +75,10 @@ bart traj -x $NSMP -y $NSPK -t $NFRM -s $GIND -c traj_none
 
 bart traj -x $NSMP -y $NSPK -t $NFRM -s $GIND -c -O -q $(DEBUG_LEVEL=0 bart estdelay -R traj_none kdat_prep) traj_ring
 
-bart repmat 5 2 traj_ring traj_prep
+bart repmat 5 2 traj_ring traj_prep1
+
+bart extract 10 0 100 traj_prep1 traj_prep
+bart extract 10 0 100 kdat_prep1 kdat_prep
 
 # --- model-based velocity mapping ---
 bart moba $SCALE_OPTS $TD_OPTS -G -m4 --sobolev_a 220 -b0:1 -i6 -R2 -d4 -g -o1.5 -t traj_prep kdat_prep VENC_ARRAY R_M4
