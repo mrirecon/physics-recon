@@ -16,10 +16,9 @@ fi
 export PATH=$TOOLBOX_PATH:$PATH
 export BART_COMPAT_VERSION="v0.6.00"
 
-if ../physics_utils/nscaling_version_check.sh ; then
+MOBA_ADD_OPTS=""
+if bart moba --interface 2>&1 | grep -q normalize_scaling >/dev/null 2>&1 ; then
 	MOBA_ADD_OPTS="--normalize_scaling --other pinit=1:1.5:1:1 --scale_data 5000 --scale_psf 1000"
-else
-	MOBA_ADD_OPTS=""
 fi
 echo $MOBA_ADD_OPTS
 

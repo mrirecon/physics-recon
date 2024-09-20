@@ -44,7 +44,7 @@ fi
 export PATH=$TOOLBOX_PATH:$PATH
 export BART_COMPAT_VERSION="v0.6.00"
 
-if ../physics_utils/nscaling_version_check.sh ; then
+if bart moba --interface 2>&1 | grep -q normalize_scaling >/dev/null 2>&1 ; then
 	RESCALE_LL=1
 else
 	RESCALE_LL=0

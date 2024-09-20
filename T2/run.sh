@@ -15,10 +15,9 @@ if [ ! -e $TOOLBOX_PATH/bart ] ; then
 	exit 1
 fi
 
-if ../physics_utils/nscaling_version_check.sh ; then
+ADD_OPTS=""
+if bart moba --interface 2>&1 | grep -q normalize_scaling >/dev/null 2>&1 ; then
 	ADD_OPTS="--normalize_scaling --other pinit=1:1.5:1:1 --scale_data 5000 --scale_psf 1000 --img_dims 320:320:1"
-else
-	ADD_OPTS=""
 fi
 echo $ADD_OPTS
 

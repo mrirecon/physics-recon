@@ -20,10 +20,12 @@ export PATH=$TOOLBOX_PATH:$PATH
 export BART_COMPAT_VERSION="v0.6.00"
 
 ADD_OPTS=""
-if ../physics_utils/nscaling_version_check.sh ; then
+if bart moba --interface 2>&1 | grep -q normalize_scaling >/dev/null 2>&1 ; then
 	ADD_OPTS+="--normalize_scaling --scale_data 5000 --scale_psf 1000 "
 fi
-if ../physics_utils/dampen_version_check.sh ; then
+if bart moba --interface 2>&1 | grep -q temporal_damping >/dev/null 2>&1 ; then
+	ADD_OPTS+="--temporal_damping 0.9"
+elif bart moba --interface 2>&1 | grep -q \"T\" >/dev/null 2>&1 ; then
 	ADD_OPTS+="-T 0.9"
 fi
 echo $ADD_OPTS
