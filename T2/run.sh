@@ -21,9 +21,10 @@ if bart moba --interface 2>&1 | grep -q normalize_scaling >/dev/null 2>&1 ; then
 fi
 echo $ADD_OPTS
 
+GPU="-g"
 if ! ../physics_utils/gpu_check.sh ; then
-       echo "bart with GPU support is required!" >&2
-       exit 1
+       echo "bart with GPU support is recommended!" >&2
+       GPU=""
 fi
 
 source ../physics_utils/data_loc.sh
@@ -49,7 +50,7 @@ NSPK=$NEXC
 
 ./prep.sh -s$READ -R$TE -G$GA -p$PHS1 -f$NEXC -e$NECO $RAW T2-data.coo T2-traj.coo T2-TE
 
-bart moba -F -i10 -n -C300 -j$lambda -d4 -g $ADD_OPTS -o $og -t T2-traj.coo T2-data.coo T2-TE T2-reco T2-sens.coo
+bart moba -F -i10 -n -C300 -j$lambda -d4 $GPU $ADD_OPTS -o $og -t T2-traj.coo T2-data.coo T2-TE T2-reco T2-sens.coo
 
 bart resize -c 0 $NBR 1 $NBR T2-reco tmp_maps
 

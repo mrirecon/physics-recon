@@ -32,9 +32,10 @@ fi
 
 echo $SCALE_OPTS $TD_OPTS
 
+GPU="-g"
 if ! ../physics_utils/gpu_check.sh ; then
-       echo "bart with GPU support is required!" >&2
-       exit 1
+       echo "bart with GPU support is recommended!" >&2
+       GPU=""
 fi
 
 source ../physics_utils/data_loc.sh
@@ -82,7 +83,7 @@ bart repmat 5 2 traj_ring traj_prep1
 bart extract 10 0 100 traj_prep1 traj_prep
 
 # --- model-based velocity mapping ---
-bart moba $SCALE_OPTS $TD_OPTS -G -m4 --sobolev_a 220 -b0:1 -i6 -R2 -d4 -g -o1.5 -t traj_prep kdat_prep VENC_ARRAY R_M4
+bart moba $SCALE_OPTS $TD_OPTS -G -m4 --sobolev_a 220 -b0:1 -i6 -R2 -d4 $GPU -o1.5 -t traj_prep kdat_prep VENC_ARRAY R_M4
 
 # crop images
 bart resize -c 0 $BASERES 1 $BASERES R_M4 R_PHASE_CONTRAST
@@ -96,7 +97,7 @@ bart scale .3 PHI VEL
 rm PHI.{cfl,hdr} R_M4.{cfl,hdr}
 
 # --- parallel imaging reconstruction ---
-bart moba $TD_OPTS -G -m5 --sobolev_a 220 -i6 -R2 -d4 -g -o1.5 -t traj_prep kdat_prep VENC_ARRAY R_M5
+bart moba $TD_OPTS -G -m5 --sobolev_a 220 -i6 -R2 -d4 $GPU -o1.5 -t traj_prep kdat_prep VENC_ARRAY R_M5
 
 # crop images
 bart resize -c 0 $BASERES 1 $BASERES R_M5 R_M5_crop

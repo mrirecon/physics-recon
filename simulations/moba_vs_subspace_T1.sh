@@ -28,9 +28,10 @@ if bart signal --interface 2>&1 | grep -q \"short-TR-LL-approx\" >/dev/null 2>&1
 fi
 echo $SIGNAL_ADD_OPTS
 
+GPU="-g"
 if ! ../physics_utils/gpu_check.sh ; then
-       echo "bart with GPU support is required!" >&2
-       exit 1
+       echo "bart with GPU support is recommended!" >&2
+       GPU=""
 fi
 
 # generating a numerical phantom using BART
@@ -102,7 +103,7 @@ ITER=10
 for (( i=0; i<${#array}; i++ ));
 do      
         REG=${array[i]}
-        bart moba $MOBA_ADD_OPTS -L -l2 -i$ITER -k -g -C300 -d4 -j$REG -o1.0 -R3 -n -t traj phantom_ksp_1 TI moba_reco_${i} sens_${i}
+        bart moba $MOBA_ADD_OPTS -L -l2 -i$ITER -k $GPU -C300 -d4 -j$REG -o1.0 -R3 -n -t traj phantom_ksp_1 TI moba_reco_${i} sens_${i}
 done
 
 #-----------------------------------------------

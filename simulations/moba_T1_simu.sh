@@ -29,10 +29,10 @@ fi
 echo $SIGNAL_ADD_OPTS
 
 
-
+GPU="-g"
 if ! ../physics_utils/gpu_check.sh ; then
-       echo "bart with GPU support is required!" >&2
-       exit 1
+       echo "bart with GPU support is recommended!" >&2
+       GPU=""
 fi
 
 # generating a numerical phantom using BART
@@ -99,7 +99,7 @@ bart saxpy $scale2 tmp1.coo tmp2.coo TI
 ITER=12
 
 REG=0.05
-bart moba $MOBA_ADD_OPTS -L -l1 -i$ITER -g -C300 -d4 -j$REG -o1.0 -n -R3 -t traj phantom_ksp TI moba_simu_T1 sens
+bart moba $MOBA_ADD_OPTS -L -l1 -i$ITER $GPU -C300 -d4 -j$REG -o1.0 -n -R3 -t traj phantom_ksp TI moba_simu_T1 sens
 bart resize -c 0 $NBR 1 $NBR moba_simu_T1 moba_simu_T1_${NBR}
 
 bart fmac mask moba_simu_T1_${NBR} moba_simu_T1_masked

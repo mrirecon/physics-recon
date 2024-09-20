@@ -22,10 +22,10 @@ if bart moba --interface 2>&1 | grep -q normalize_scaling >/dev/null 2>&1 ; then
 fi
 echo $MOBA_ADD_OPTS
 
-
+GPU="-g"
 if ! ../physics_utils/gpu_check.sh ; then
-       echo "bart with GPU support is required!" >&2
-       exit 1
+       echo "bart with GPU support is recommended!" >&2
+       GPU=""
 fi
 
 # generating a numerical phantom using BART
@@ -91,7 +91,7 @@ bart scale $TE tmp1.coo TE
 ITER=15
 
 REG=0.004
-bart moba $MOBA_ADD_OPTS -F -l1 -i$ITER -C400 -d4 -j$REG -g -o1.0 -B0.1 -n -t traj phantom_ksp TE moba_simu_T2 sens
+bart moba $MOBA_ADD_OPTS -F -l1 -i$ITER -C400 -d4 -j$REG $GPU -o1.0 -B0.1 -n -t traj phantom_ksp TE moba_simu_T2 sens
 
 bart resize -c 0 $NBR 1 $NBR moba_simu_T2 moba_simu_T2_${NBR}
 

@@ -73,9 +73,10 @@ if bart moba --interface 2>&1 | grep -q normalize_scaling >/dev/null 2>&1 ; then
 fi
 echo $ADD_OPTS
 
+GPU="-g"
 if ! ../physics_utils/gpu_check.sh ; then
-       echo "bart with GPU support is required!" >&2
-       exit 1
+       echo "bart with GPU support is recommended!" >&2
+       GPU=""
 fi
 
 #WORKDIR=$(mktemp -d)
@@ -93,7 +94,7 @@ which bart
 bart version
 
 
-OMP_NUM_THREADS=1 nice -n10 bart moba -L -g -i10 -d4 -B0.3 -C300 -s0.475 -k -R3 -o1.25 $ADD_OPTS -j$lambda -n -t $traj $ksp $TI $reco $sens
+OMP_NUM_THREADS=1 nice -n10 bart moba -L $GPU -i10 -d4 -B0.3 -C300 -s0.475 -k -R3 -o1.25 $ADD_OPTS -j$lambda -n -t $traj $ksp $TI $reco $sens
 
 END=$(date +%s)
 DIFF=$(($END - $START))
