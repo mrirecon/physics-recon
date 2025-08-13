@@ -1,3 +1,8 @@
+**The main repository has moved to: https://gitlab.tugraz.at/ibi/mrirecon/papers/physics-reconstruction**
+
+**Please check there for updates.**
+
+
 ##
 
 This repository provides the scripts to reproduce the results presented in:
